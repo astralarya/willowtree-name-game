@@ -5,6 +5,9 @@ Includes React, Redux, Typescript, CSS Modules, SCSS
 
 ## Usage
 
+`npm install`
+Install project dependencies
+
 `npm start`
 Start a webpack-dev-server for this project
 
