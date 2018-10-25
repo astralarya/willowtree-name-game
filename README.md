@@ -1,5 +1,5 @@
-# web-app-seed
-Web Application Seed
+# willowtree-name-game
+WillowTree Name Game test project
 
 Includes React, Redux, Typescript, CSS Modules, SCSS
 

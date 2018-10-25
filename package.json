@@ -1,7 +1,7 @@
 {
-  "name": "web-app-seed",
+  "name": "willowtree-name-game",
   "version": "1.0.0",
-  "description": "Web Application Seed",
+  "description": "WillowTree Name Game test project",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
