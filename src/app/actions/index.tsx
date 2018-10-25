@@ -1,5 +1,5 @@
-import {TOGGLE_ACTIVE} from "../constants/action-types";
+import {AppAction} from "../types/redux";
 
-export const toggleActive = () => ({
-  type: TOGGLE_ACTIVE,
+export const toggleActive = (): AppAction => ({
+  type: "TOGGLE_ACTIVE",
 });

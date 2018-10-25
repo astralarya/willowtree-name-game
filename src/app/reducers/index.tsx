@@ -1,12 +1,12 @@
-import {TOGGLE_ACTIVE} from "../constants/action-types";
+import {AppAction, AppState} from "../types/redux";
 
-const initialState = {
+const initialState: AppState = {
   active: true,
 };
 
-const rootReducer = (state = initialState, action) => {
+const rootReducer = (state: AppState = initialState, action: AppAction) => {
   switch (action.type) {
-    case TOGGLE_ACTIVE:
+    case "TOGGLE_ACTIVE":
       return {...state,
         active: !state.active,
       };

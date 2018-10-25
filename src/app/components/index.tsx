@@ -1,26 +1,30 @@
 import React from "react";
 import {connect} from "react-redux";
-import styles from "./index.scss";
+import {Dispatch} from "redux";
 import {toggleActive} from "../actions/index";
+import {AppAction, AppState} from "../types/redux";
+import styles from "./index.scss";
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: AppState) => {
   return {
     active: state.active,
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => {
   return {
-    toggleActive: () => dispatch(toggleActive()),
+    toggleActiveProp: () => dispatch(toggleActive()),
   };
 };
 
-const Main = ({active, toggleActive}) => {
+const Main = ({active, toggleActiveProp}: {active: boolean, toggleActiveProp: () => AppAction}) => {
+  const className = active ?
+    `${styles.button} ${styles.active}` :
+    `${styles.button} ${styles.inactive}`;
   return (
-    <div className={active?
-        `${styles.button} ${styles.active}`:
-        `${styles.button} ${styles.inactive}`}
-      onClick={toggleActive}
+    <div
+      className={className}
+      onClick={toggleActiveProp}
     >
       <p>Hello World!</p>
     </div>
