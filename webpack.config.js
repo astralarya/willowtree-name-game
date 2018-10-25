@@ -1,10 +1,20 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
   entry: './src/index.tsx',
+  resolve: {
+    extensions: [".wasm", ".mjs", ".js", ".json", ".tsx", ".ts"],
+  },
   module: {
     rules: [{
+      test: /\.tsx?$/,
+      enforce: "pre",
+      use: {
+        loader: "tslint-loader",
+      }
+    },{
       test: /\.tsx?$/,
       exclude: /node_modules/,
       use: {
@@ -42,6 +52,7 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
+    new ForkTsCheckerWebpackPlugin(),
   ],
   devtool: "source-map",
 }

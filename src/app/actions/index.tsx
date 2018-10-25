@@ -1,4 +1,4 @@
-import {TOGGLE_ACTIVE} from "../constants/action-types.tsx";
+import {TOGGLE_ACTIVE} from "../constants/action-types";
 
 export const toggleActive = () => ({
   type: TOGGLE_ACTIVE,

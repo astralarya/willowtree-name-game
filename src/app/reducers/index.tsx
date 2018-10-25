@@ -1,4 +1,4 @@
-import {TOGGLE_ACTIVE} from "../constants/action-types.tsx";
+import {TOGGLE_ACTIVE} from "../constants/action-types";
 
 const initialState = {
   active: true,

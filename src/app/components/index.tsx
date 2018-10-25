@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import styles from "./index.scss";
-import {toggleActive} from "../actions/index.tsx";
+import {toggleActive} from "../actions/index";
 
 const mapStateToProps = (state) => {
   return {
