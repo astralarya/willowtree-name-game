@@ -1,7 +1,7 @@
 {
-  "name": "name-game",
+  "name": "web-app-seed",
   "version": "1.0.0",
-  "description": "Learn to put names to faces",
+  "description": "Web application seed",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
