@@ -3,7 +3,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: "./src/index.tsx",
   resolve: {
     extensions: [".wasm", ".mjs", ".js", ".json", ".tsx", ".ts"],
   },
@@ -37,9 +37,9 @@ module.exports = {
       use: [
         MiniCssExtractPlugin.loader,
         {
-          loader: 'css-loader',
+          loader: "css-loader",
           query: { modules: true },
-        }, 'postcss-loader', 'sass-loader',
+        }, "postcss-loader", "sass-loader",
       ],
     }],
   },
