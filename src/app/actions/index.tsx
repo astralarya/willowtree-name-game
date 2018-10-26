@@ -28,6 +28,14 @@ export const fetchData = (uri: string) => {
       .then(
         (json) => dispatch(recieveData(json.filter(
           (teamMember: TeamMember) => typeof teamMember.headshot.url === "string",
+        ).map( // explicitly specify url scheme
+          (teamMember: TeamMember) => ({
+            ...teamMember,
+            headshot: {
+              ...teamMember.headshot,
+              url: `http:${teamMember.headshot.url}`,
+            },
+          }),
         ))),
       );
   };
