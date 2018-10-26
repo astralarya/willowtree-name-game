@@ -7,6 +7,8 @@ export type AppState = {
   currReveal: boolean[];
   featured: boolean;
   overlay: boolean;
+
+  streak: number;
 };
 
 

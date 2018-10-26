@@ -16,6 +16,8 @@ const mapStateToProps = (state: AppState) => {
     currReveal: state.currReveal,
     featured: state.featured,
     overlay: state.overlay,
+
+    streak: state.streak,
   };
 };
 
@@ -34,6 +36,7 @@ const Game = ({
   currReveal,
   featured,
   overlay,
+  streak,
   answerIncorrect_,
   beginRound_,
   endRound_,
@@ -74,13 +77,18 @@ endRound_: () => Promise<AppAction>,
         reveal={currReveal[idx] || featured && idx === currIdx}
         hide={featured && idx !== currIdx}
         featured={featured && idx === currIdx}
-        onClick={onClickFace}
+        onClick={!featured ? onClickFace : undefined}
       />
     ));
     return (
       <div>
         <div className={`${styles.overlay} ${!overlay ? styles.clear : ""}`} />
-        <h1>{title}</h1>
+        <div className={styles.header}>
+          <h1 className={styles.title}>{title}</h1>
+          <div className={styles.scoreboard}>
+            <p>Streak: {streak}</p>
+          </div>
+        </div>
         <div className={styles.faceContainer}>
           {faceArray}
         </div>
