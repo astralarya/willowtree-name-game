@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {newRound} from "../actions/game";
 import {AppAction, AppState, TeamMember} from "../types/redux";
+import {Face} from "./face";
 
 const mapStateToProps = (state: AppState) => {
   return {
@@ -35,7 +36,10 @@ newRound_: () => AppAction}) => {
     const currName = currFaces[currIdx];
     return (
       <div>
-        <h1>{`${currName.firstName} ${currName.lastName}`}</h1>
+        <h1>{`Who is ${currName.firstName} ${currName.lastName}?`}</h1>
+        {currFaces.map((teamMember: TeamMember, idx: number) => (
+          <Face key={idx} teamMember={teamMember} />
+        ))}
       </div>
     );
   }
