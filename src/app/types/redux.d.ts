@@ -1,6 +1,9 @@
 export type AppState = {
   status: "not-ready" | "loading" | "error" | "ready";
   teamMembers: TeamMember[];
+
+  currFaces: TeamMember[];
+  currIdx: number;
 };
 
 
@@ -32,4 +35,5 @@ export type AppAction =
   | { type: "REQUEST_DATA", uri: string }
   | { type: "REQUEST_ERROR" }
   | { type: "RECIEVE_DATA", teamMembers: TeamMember[] }
+  | { type: "NEW_ROUND" }
 ;

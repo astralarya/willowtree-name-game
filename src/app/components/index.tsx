@@ -1,9 +1,10 @@
 import React from "react";
 import {connect} from "react-redux";
-import {Dispatch} from "redux";
 import {ThunkAction} from "redux-thunk";
 import {fetchData} from "../actions/index";
 import {AppAction, AppState, TeamMember} from "../types/redux";
+import Game from "./game";
+
 import styles from "./index.scss";
 
 const mapStateToProps = (state: AppState) => {
@@ -41,11 +42,8 @@ fetchData_: (uri: string) => Promise<AppAction>}) => {
         </div>
       );
     case "ready":
-      console.log(teamMembers);
       return (
-        <div>
-          <p>Ready</p>
-        </div>
+        <Game />
       );
   }
 };
