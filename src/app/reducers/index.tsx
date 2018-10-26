@@ -1,4 +1,4 @@
-import {AppAction, AppState} from "../types/redux";
+import {AppAction, AppState, TeamMember} from "../types/redux";
 
 const initialState: AppState = {
   status: "not-ready",
@@ -6,7 +6,10 @@ const initialState: AppState = {
 
   currFaces: [],
   currIdx: null,
+  currReveal: [],
 };
+
+const FACE_ARRAY_LENGTH = 5;
 
 const rootReducer = (state: AppState = initialState, action: AppAction) => {
   switch (action.type) {
@@ -24,11 +27,18 @@ const rootReducer = (state: AppState = initialState, action: AppAction) => {
         teamMembers: action.teamMembers,
       };
     case "NEW_ROUND":
-      const currFaces = shuffle([...state.teamMembers]).slice(0, 5);
-      const currIdx = Math.floor(Math.random() * 5);
+      const currFaces = shuffle([...state.teamMembers]).slice(0, FACE_ARRAY_LENGTH);
+      const currIdx = Math.floor(Math.random() * FACE_ARRAY_LENGTH);
       return {...state,
         currFaces,
         currIdx,
+        currReveal: new Array(FACE_ARRAY_LENGTH).fill(false),
+      };
+    case "ANSWER_INCORRECT":
+      return {...state,
+        currReveal: state.currFaces.map((teamMember: TeamMember, idx: number) => {
+          return teamMember.slug === action.slug || state.currReveal[idx];
+        }),
       };
     default:
       return state;

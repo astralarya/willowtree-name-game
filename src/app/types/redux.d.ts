@@ -4,6 +4,7 @@ export type AppState = {
 
   currFaces: TeamMember[];
   currIdx: number;
+  currReveal: boolean[];
 };
 
 
@@ -36,4 +37,6 @@ export type AppAction =
   | { type: "REQUEST_ERROR" }
   | { type: "RECIEVE_DATA", teamMembers: TeamMember[] }
   | { type: "NEW_ROUND" }
+  | { type: "ANSWER_CORRECT" }
+  | { type: "ANSWER_INCORRECT", slug: string }
 ;
