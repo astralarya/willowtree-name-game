@@ -1,34 +1,53 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {toggleActive} from "../actions/index";
-import {AppAction, AppState} from "../types/redux";
+import {ThunkAction} from "redux-thunk";
+import {fetchData} from "../actions/index";
+import {AppAction, AppState, TeamMember} from "../types/redux";
 import styles from "./index.scss";
 
 const mapStateToProps = (state: AppState) => {
   return {
-    active: state.active,
+    status: state.status,
+    teamMembers: state.teamMembers,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => {
+const mapDispatchToProps = (dispatch: any) => { // HOPE typings fix
   return {
-    toggleActiveProp: () => dispatch(toggleActive()),
+    fetchData_: (uri: string) => dispatch(fetchData(uri)),
   };
 };
 
-const Main = ({active, toggleActiveProp}: {active: boolean, toggleActiveProp: () => AppAction}) => {
-  const className = active ?
-    `${styles.button} ${styles.active}` :
-    `${styles.button} ${styles.inactive}`;
-  return (
-    <div
-      className={className}
-      onClick={toggleActiveProp}
-    >
-      <p>Hello World!</p>
-    </div>
-  );
+const Main = ({uri, status, teamMembers, fetchData_}: {
+uri: string,
+status: "not-ready" | "loading" | "error" | "ready",
+teamMembers: TeamMember[],
+fetchData_: (uri: string) => Promise<AppAction>}) => {
+  switch (status) {
+    case "not-ready":
+      fetchData_(uri);
+      // fall through
+    case "loading":
+      return (
+        <div>
+          <p>Loading</p>
+        </div>
+      );
+    case "error":
+      return (
+        <div>
+          <p>Error</p>
+        </div>
+      );
+    case "ready":
+      console.log(teamMembers);
+      return (
+        <div>
+          <p>Ready</p>
+        </div>
+      );
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

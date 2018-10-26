@@ -5,10 +5,10 @@ import Main from "./components/index";
 import store from "./store/index";
 import "./types/css-modules.d.ts";
 
-const App = () => {
+const App = ({uri}: {uri: string}) => {
   return (
     <Provider store={store}>
-      <Main />
+      <Main uri={uri}/>
     </Provider>
   );
 };
