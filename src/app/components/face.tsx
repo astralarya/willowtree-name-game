@@ -1,12 +1,14 @@
 import React from "react";
 import {TeamMember} from "../types/redux";
 
+import styles from "./face.scss";
+
 export const Face = ({teamMember}: {
-teamMembers: TeamMember[],
+teamMember: TeamMember,
 }) => {
   return (
-    <div>
+    <div className={styles.container}>
       <img src={teamMember.headshot.url} />
     </div>
   );
-}
+};
