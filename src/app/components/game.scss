@@ -5,16 +5,18 @@
 }
 
 .title {
-  margin-left: 1em;
+  margin-left: 1rem;
 }
 
 .scoreboard {
-  margin-right: 2em;
+  margin-right: 2rem;
+  margin-bottom: 0.5rem;
 }
 
 .faceContainer {
   display: flex;
   position: relative;
+  padding-right: 2rem;
 }
 
 .overlay {
