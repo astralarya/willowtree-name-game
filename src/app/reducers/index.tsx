@@ -8,6 +8,7 @@ const initialState: AppState = {
   currIdx: null,
   currReveal: [],
   featured: false,
+  overlay: true,
 };
 
 const FACE_ARRAY_LENGTH = 5;
@@ -35,6 +36,14 @@ const rootReducer = (state: AppState = initialState, action: AppAction) => {
         currIdx,
         currReveal: new Array(FACE_ARRAY_LENGTH).fill(false),
         featured: false,
+      };
+    case "CLEAR_OVERLAY":
+      return {...state,
+        overlay: false,
+      };
+    case "DRAW_OVERLAY":
+      return {...state,
+        overlay: true,
       };
     case "ANSWER_CORRECT":
       return {...state,

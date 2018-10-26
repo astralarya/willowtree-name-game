@@ -5,7 +5,8 @@ export type AppState = {
   currFaces: TeamMember[];
   currIdx: number;
   currReveal: boolean[];
-  featured: false;
+  featured: boolean;
+  overlay: boolean;
 };
 
 
@@ -40,4 +41,6 @@ export type AppAction =
   | { type: "NEW_ROUND" }
   | { type: "ANSWER_CORRECT" }
   | { type: "ANSWER_INCORRECT", slug: string }
+  | { type: "CLEAR_OVERLAY" }
+  | { type: "DRAW_OVERLAY" }
 ;

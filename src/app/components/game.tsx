@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {Dispatch} from "redux";
-import {answerCorrect, answerIncorrect, newRound} from "../actions/game";
+import {answerIncorrect, beginRound, endRound} from "../actions/game";
 import {AppAction, AppState, TeamMember} from "../types/redux";
 import {Face} from "./face";
 
@@ -15,14 +15,15 @@ const mapStateToProps = (state: AppState) => {
     currIdx: state.currIdx,
     currReveal: state.currReveal,
     featured: state.featured,
+    overlay: state.overlay,
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<AppAction>) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
-    answerCorrect_: () => dispatch(answerCorrect()),
     answerIncorrect_: (slug: string) => dispatch(answerIncorrect(slug)),
-    newRound_: () => dispatch(newRound()),
+    beginRound_: () => dispatch(beginRound()),
+    endRound_: () => dispatch(endRound()),
   };
 };
 
@@ -32,21 +33,23 @@ const Game = ({
   currIdx,
   currReveal,
   featured,
-  answerCorrect_,
+  overlay,
   answerIncorrect_,
-  newRound_,
+  beginRound_,
+  endRound_,
 }: {
 teamMembers: TeamMember[],
 currFaces: TeamMember[],
 currIdx: number,
 currReveal: boolean[],
 featured: boolean,
-answerCorrect_: () => AppAction,
+overlay: boolean,
 answerIncorrect_: (slug: string) => AppAction,
-newRound_: () => AppAction,
+beginRound_: () => Promise<AppAction>,
+endRound_: () => Promise<AppAction>,
 }) => {
   if (currIdx === null) {
-    newRound_();
+    beginRound_();
     return (
       <div>
         <p>Ready</p>
@@ -55,11 +58,11 @@ newRound_: () => AppAction,
   } else {
     const currName = currFaces[currIdx];
     const title = featured ?
-      `${currName.firstName} ${currName.lastName}${currName.jobTitle ? ` - ${currName.jobTitle}`: ""}` :
+      `${currName.firstName} ${currName.lastName}${currName.jobTitle ? ` - ${currName.jobTitle}` : ""}` :
       `Who is ${currName.firstName} ${currName.lastName}?`;
     const onClickFace = (teamMember: TeamMember) => {
       if (teamMember.slug === currName.slug) {
-        answerCorrect_();
+        endRound_();
       } else {
         answerIncorrect_(teamMember.slug);
       }
@@ -74,11 +77,9 @@ newRound_: () => AppAction,
         onClick={onClickFace}
       />
     ));
-    const socialLinks = currName.socialLinks.map(({callToAction = "", url = ""}, idx: number) =>
-      <li key={idx}><a href={url}>{callToAction}</a></li>
-    );
     return (
       <div>
+        <div className={`${styles.overlay} ${!overlay ? styles.clear : ""}`} />
         <h1>{title}</h1>
         <div className={styles.faceContainer}>
           {faceArray}
