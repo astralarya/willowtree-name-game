@@ -10,7 +10,8 @@ const initialState: AppState = {
   featured: false,
   overlay: true,
 
-  streak: 0,
+  bestStreak: 0,
+  currStreak: 0,
 };
 
 const FACE_ARRAY_LENGTH = 5;
@@ -50,14 +51,16 @@ const rootReducer = (state: AppState = initialState, action: AppAction) => {
     case "ANSWER_CORRECT":
       return {...state,
         featured: true,
-        streak: state.streak + 1,
+
+        bestStreak: state.currStreak === state.bestStreak ? state.currStreak + 1 : state.bestStreak,
+        currStreak: state.currStreak + 1,
       };
     case "ANSWER_INCORRECT":
       return {...state,
         currReveal: state.currFaces.map((teamMember: TeamMember, idx: number) => {
           return teamMember.slug === action.slug || state.currReveal[idx];
         }),
-        streak: 0,
+        currStreak: 0,
       };
     default:
       return state;

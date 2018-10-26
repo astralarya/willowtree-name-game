@@ -8,7 +8,8 @@ export type AppState = {
   featured: boolean;
   overlay: boolean;
 
-  streak: number;
+  bestStreak: number;
+  currStreak: number;
 };
 
 
