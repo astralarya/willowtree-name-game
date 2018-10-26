@@ -26,7 +26,9 @@ export const fetchData = (uri: string) => {
         (error) => dispatch(requestError()),
       )
       .then(
-        (json) => dispatch(recieveData(json)),
+        (json) => dispatch(recieveData(json.filter(
+          (teamMember: TeamMember) => typeof teamMember.headshot.url === "string",
+        ))),
       );
   };
 };
