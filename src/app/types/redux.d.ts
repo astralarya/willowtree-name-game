@@ -5,6 +5,7 @@ export type AppState = {
   currFaces: TeamMember[];
   currIdx: number;
   currReveal: boolean[];
+  featured: false;
 };
 
 

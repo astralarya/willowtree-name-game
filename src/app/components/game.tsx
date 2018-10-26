@@ -14,6 +14,7 @@ const mapStateToProps = (state: AppState) => {
     currFaces: state.currFaces,
     currIdx: state.currIdx,
     currReveal: state.currReveal,
+    featured: state.featured,
   };
 };
 
@@ -30,6 +31,7 @@ const Game = ({
   currFaces,
   currIdx,
   currReveal,
+  featured,
   answerCorrect_,
   answerIncorrect_,
   newRound_,
@@ -38,6 +40,7 @@ teamMembers: TeamMember[],
 currFaces: TeamMember[],
 currIdx: number,
 currReveal: boolean[],
+featured: boolean,
 answerCorrect_: () => AppAction,
 answerIncorrect_: (slug: string) => AppAction,
 newRound_: () => AppAction,
@@ -51,6 +54,9 @@ newRound_: () => AppAction,
     );
   } else {
     const currName = currFaces[currIdx];
+    const title = featured ?
+      `${currName.firstName} ${currName.lastName}${currName.jobTitle ? ` - ${currName.jobTitle}`: ""}` :
+      `Who is ${currName.firstName} ${currName.lastName}?`;
     const onClickFace = (teamMember: TeamMember) => {
       if (teamMember.slug === currName.slug) {
         answerCorrect_();
@@ -62,13 +68,18 @@ newRound_: () => AppAction,
       <Face
         key={idx}
         teamMember={teamMember}
-        reveal={currReveal[idx]}
+        reveal={currReveal[idx] || featured && idx === currIdx}
+        hide={featured && idx !== currIdx}
+        featured={featured && idx === currIdx}
         onClick={onClickFace}
       />
     ));
+    const socialLinks = currName.socialLinks.map(({callToAction = "", url = ""}, idx: number) =>
+      <li key={idx}><a href={url}>{callToAction}</a></li>
+    );
     return (
       <div>
-        <h1>{`Who is ${currName.firstName} ${currName.lastName}?`}</h1>
+        <h1>{title}</h1>
         <div className={styles.faceContainer}>
           {faceArray}
         </div>

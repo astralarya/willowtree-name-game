@@ -35,4 +35,13 @@
       transition: bottom 0.5s;
     }
   }
+  &.hide {
+    opacity: 0;
+    transition: opacity 1s;
+    cursor: default;
+  }
+  left: 1em;
+  &.featured img {
+    opacity: 1;
+  }
 }

@@ -7,6 +7,7 @@ const initialState: AppState = {
   currFaces: [],
   currIdx: null,
   currReveal: [],
+  featured: false,
 };
 
 const FACE_ARRAY_LENGTH = 5;
@@ -33,6 +34,11 @@ const rootReducer = (state: AppState = initialState, action: AppAction) => {
         currFaces,
         currIdx,
         currReveal: new Array(FACE_ARRAY_LENGTH).fill(false),
+        featured: false,
+      };
+    case "ANSWER_CORRECT":
+      return {...state,
+        featured: true,
       };
     case "ANSWER_INCORRECT":
       return {...state,
